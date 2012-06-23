@@ -23,7 +23,7 @@ class Pypi(BotPlugin):
 
         total = 0
         response = '\n'
-        for version in self.client.package_releases(args):
+        for version in self.client.package_releases(args, True):
             for name, count in self.client.release_downloads(args, version):
                 response += '%5i x %s\n' % (count, name)
                 total += count
