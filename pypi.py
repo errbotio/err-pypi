@@ -1,5 +1,12 @@
-from errbot.botplugin import BotPlugin
-from errbot.jabberbot import botcmd
+# Backward compatibility
+from errbot.version import VERSION
+from errbot.utils import version2array
+if version2array(VERSION) >= [1,6,0]:
+    from errbot import botcmd, BotPlugin
+else:
+    from errbot.botplugin import BotPlugin
+    from errbot.jabberbot import botcmd
+
 import xmlrpclib
 
 class Pypi(BotPlugin):
