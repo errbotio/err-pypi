@@ -1,21 +1,18 @@
-# Backward compatibility
-from errbot.version import VERSION
-from errbot.utils import version2array
-if version2array(VERSION) >= [1,6,0]:
-    from errbot import botcmd, BotPlugin
-else:
-    from errbot.botplugin import BotPlugin
-    from errbot.jabberbot import botcmd
+from errbot import botcmd, BotPlugin, PY2
 
-import xmlrpclib
+if PY2:
+    import xmlrpclib as client
+else:
+    from xmlrpc import client
 
 class Pypi(BotPlugin):
-
-    client = xmlrpclib.ServerProxy('http://pypi.python.org/pypi')
+    def __init__(self):
+        super().__init__()
+        self.client = client.ServerProxy('http://pypi.python.org/pypi')
 
     @botcmd
     def searchpy(self, mess, args):
-        responses = self.client.search( {'name': args})
+        responses = self.client.search({'name': args})
         formatted_answer = '\n'.join('%s-%s: %s' % (e['name'], e['version'], e['summary']) for e in responses)
         return formatted_answer
 
@@ -35,4 +32,3 @@ class Pypi(BotPlugin):
                 response += '%5i x %s\n' % (count, name)
                 total += count
         return response + "\n%s has been downloaded %i times" % (args, total)
-
