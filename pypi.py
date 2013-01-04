@@ -7,7 +7,7 @@ else:
 
 class Pypi(BotPlugin):
     def __init__(self):
-        super().__init__()
+        super(Pypi, self).__init__()
         self.client = client.ServerProxy('http://pypi.python.org/pypi')
 
     @botcmd
