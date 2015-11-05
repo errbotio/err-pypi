@@ -6,8 +6,8 @@ else:
     from xmlrpc import client
 
 class Pypi(BotPlugin):
-    def __init__(self):
-        super(Pypi, self).__init__()
+    def __init__(self, bot):
+        super(Pypi, self).__init__(bot)
         self.client = client.ServerProxy('http://pypi.python.org/pypi')
 
     @botcmd
