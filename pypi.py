@@ -1,14 +1,10 @@
-from errbot import botcmd, BotPlugin, PY2
-
-if PY2:
-    import xmlrpclib as client
-else:
-    from xmlrpc import client
+from errbot import botcmd, BotPlugin
+from xmlrpc import client
 
 class Pypi(BotPlugin):
     def __init__(self, bot):
         super(Pypi, self).__init__(bot)
-        self.client = client.ServerProxy('http://pypi.python.org/pypi')
+        self.client = client.ServerProxy('https://pypi.python.org/pypi')
 
     @botcmd
     def searchpy(self, mess, args):

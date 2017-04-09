@@ -4,6 +4,3 @@ Module = pypi
 
 [Documentation]
 Description = Some commands to query pypi
-
-[Python]
-Version = 2+
