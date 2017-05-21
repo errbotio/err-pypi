@@ -2,8 +2,8 @@ from errbot import botcmd, BotPlugin
 from xmlrpc import client
 
 class Pypi(BotPlugin):
-    def __init__(self, bot):
-        super(Pypi, self).__init__(bot)
+    def __init__(self, *args, **kwargs):
+        super(Pypi, self).__init__(*args, **kwargs)
         self.client = client.ServerProxy('https://pypi.python.org/pypi')
 
     @botcmd
